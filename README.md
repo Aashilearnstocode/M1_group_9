@@ -7,7 +7,8 @@
 * [@Samridhim18](https://github.com/Samridhim18)
 
 ## Project Overview
-[Provide a brief explanation of the project here]
+Quantifying the Sum-Rate Cost of Reciprocity in Beyond-Diagonal RIS-Aided MU-MISO Systems: A Manifold Optimisation Comparison Across Single-, Group-, and Fully-Connected Architectures
+
 
 ## M1 Contents
 This repository contains the milestone 1 (M1) submission for Group 9. The folder is structured as follows:
