@@ -11,9 +11,9 @@ constraint (Theta = Theta.' is *not* imposed). The reciprocal method adds exactl
 | Mode | Code | What it is | Use it for |
 |---|---|---|---|
 | **Joint** (paper-faithful) | `li_joint_optimizer.m` | Li Alg. 1: block-coordinate ascent over iota, tau, W (closed form + bisection), Theta (Riemannian CG) | the "general baseline" and paper validation |
-| **Matched / V-frozen** | `general_fixedV_optimizer.m` | Aashi's `run_cga_optimizer` with `nu = 0` + plain unitary projection | like-for-like reciprocity gap against Aashi's pipeline |
+| **Matched / V-frozen** | `general_fixedV_optimizer.m` | reciprocal's `run_cga_optimizer` with `nu = 0` + plain unitary projection | like-for-like reciprocity gap against reciprocal's pipeline |
 
-Aashi's reciprocal pipeline freezes V at the initial MMSE precoder, Li's algorithm updates V every outer iteration.
+reciprocal's pipeline freezes V at the initial MMSE precoder, Li's algorithm updates V every outer iteration.
 Compare reciprocal vs general **within the same mode**; the joint-vs-frozen difference is a V-update effect, not a reciprocity effect.
 
 ## Files
@@ -27,7 +27,7 @@ Compare reciprocal vs general **within the same mode**; the joint-vs-frozen diff
 
 ## Test configuration (project M2)
 N = 2, K = 2, R = 32, Pmax = 20 dBm, Rayleigh, noise -80 dBm, d_BS-RIS = 50 m, d_RIS-user = 2.5 m, zeta_0 = -30 dB, eps = 2.2
-(all from Aashi's `config.m`). GC uses Rg = 4 (G = 8 groups, as in Li Fig. 9).
+(all from reciprocal's `config.m`). GC uses Rg = 4 (G = 8 groups, as in Li Fig. 9).
 Matched draws: `rng(d,'twister') -> generate_channels -> initialize_theta(R,'SC',R) -> mmse_beamformer`; keep this call order.
 
 ## Algorithm settings
@@ -36,14 +36,14 @@ Armijo c = 1e-4, halving, polar retraction. These are defaults of `li_joint_opti
 
 ## Deviations from the paper (simplifications for M2)
 1. Reflective mode only (K_t = 0, Phi_t = 0), no direct BS-user link — same as the project model.
-2. All G blocks are updated **jointly** on the product manifold, not one group at a time (Alg. 2, steps 4-15). Same stationary points; Aashi's pipeline also updates all blocks jointly.
+2. All G blocks are updated **jointly** on the product manifold, not one group at a time (Alg. 2, steps 4-15). Same stationary points; reciprocal's pipeline also updates all blocks jointly.
 3. Tangent projection is the standard (block-)unitary one, Gamma - Theta*sym(Theta^H Gamma). Eq. (31) in the arXiv text (`chdiag`) is not the unitary-manifold projection as printed.
 4. Retraction: polar factor via SVD (identical to the paper's (Phi + d Xi)(I + d^2 Xi^H Xi)^(-1/2) for tangent Xi).
-5. Aashi's code multiplies noise etc. in physical units (hence her tiny Armijo constant 2e-11); this folder normalises internally. Final rates are evaluated with her `calculate_sinr` / `calculate_sumrate` in physical units (checked in the tests).
+5. reciprocal's code multiplies noise etc. in physical units (hence her tiny Armijo constant 2e-11); this folder normalises internally. Final rates are evaluated with her `calculate_sinr` / `calculate_sumrate` in physical units (checked in the tests).
 
 ## Left for M3
 Rician fading, sweeps over R, G, Pmax, 50-200 draw Monte-Carlo, runtime/complexity, SC special-case algorithm (Li Alg. 3), hybrid (STAR) mode if the scope grows.
 
 ## Validation status
-`test_general_baseline.m` — finite-difference gradient check, surrogate vs eq. (21a), monotone ascent, unitarity ~1e-15, power constraint, block structure, metric agreement with Aashi's functions, and FC >= GC >= SC on average.
+`test_general_baseline.m` — finite-difference gradient check, surrogate vs eq. (21a), monotone ascent, unitarity ~1e-15, power constraint, block structure, metric agreement with reciprocal's functions, and FC >= GC >= SC on average.
 `validate_li_trends.m` — qualitative trends of Li Fig. 9/10 (rate grows with P; FC > GC > SC in Rayleigh).
