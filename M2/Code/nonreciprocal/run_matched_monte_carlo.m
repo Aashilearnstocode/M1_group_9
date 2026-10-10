@@ -1,6 +1,6 @@
 % run_matched_monte_carlo.m
 % Matched comparison reciprocal (Aashi) vs general (this folder) on identical draws.
-%   rec_*  : reciprocal CGA, nu = 1, final symmetrise + polar projection (Aashi's pipeline)
+%   rec_*  : reciprocal CGA, nu = 1, final symmetrise + polar projection (reciprocal's pipeline)
 %   gen_fv : general, V frozen,  same CGA machinery with nu = 0   <- like-for-like with rec_*
 %   gen_jt : general, joint V/Theta (Li Algorithm 1)              <- paper-faithful baseline
 % "fv" = rate with the frozen initial V;  "v2" = rate after recomputing the MMSE V at the end.

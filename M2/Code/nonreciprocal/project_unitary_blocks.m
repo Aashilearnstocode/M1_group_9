@@ -1,6 +1,6 @@
 function Theta_out = project_unitary_blocks(Theta, Rg)
 % PROJECT_UNITARY_BLOCKS  Exact projection onto block-diagonal unitary matrices.
-%   Non-reciprocal counterpart of Aashi's enforce_symmetry_unitarity.m:
+%   Non-reciprocal counterpart of reciprocal's enforce_symmetry_unitarity.m:
 %   it does the polar/SVD step but NO symmetrisation, so Theta is NOT forced
 %   to satisfy Theta = Theta.'.
 %   Rg = 1 -> SC (diagonal), Rg = R/G -> GC, Rg = R -> FC.

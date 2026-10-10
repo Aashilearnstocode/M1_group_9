@@ -5,7 +5,7 @@ function [Theta_final, hist, out] = general_fixedV_optimizer(H_TX, H_RX, Theta_i
 %   end instead of enforce_symmetry_unitarity.  Same start, same V, same
 %   tolerances as the reciprocal run  ==>  the only difference is the
 %   reciprocity constraint, which is exactly what the project measures.
-%   Requires Aashi's functions on the path (see add_reciprocal_path.m).
+%   Requires reciprocal's functions on the path (see add_reciprocal_path.m).
     nu = 0;
     [Theta_opt, hist] = run_cga_optimizer(H_TX, H_RX, Theta_init, V, p, Rg, nu);
     Theta_final = project_unitary_blocks(Theta_opt, Rg);
