@@ -1,4 +1,4 @@
-# SOTA Synthesis, Gap Statement and Positioning — Group 9 (M2, Member 1)
+# SOTA Synthesis, Gap Statement and Positioning — Group 9 
 
 *Search date: 10 Oct 2026. Verification levels:* **FULL** = read the PDF · **ARXIV-FETCH** = read arXiv abstract/HTML through a web-fetch summary (must be re-read before quoting numbers) · **LISTED-ONLY** = taken from our M1 reference list, not re-checked.
 
